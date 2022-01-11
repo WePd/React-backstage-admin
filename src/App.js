@@ -1,9 +1,10 @@
+import { useRoutes } from "react-router-dom"
+import routes from "./router/router"
+
+import "./App.scss"
+
 function App() {
-  return (
-    <div>
-      <h3>Hello React</h3>
-    </div>
-  );
+	return useRoutes(routes)
 }
 
-export default App;
+export default App

@@ -1,0 +1,41 @@
+.header {
+	display: flex;
+	align-items: center;
+	padding: 0;
+	.logo {
+		width: 150px;
+		height: 32px;
+		color: #fff;
+		p {
+			text-align: center;
+			height: 100%;
+			line-height: 32px;
+			font-size: 20px;
+		}
+	}
+	.login {
+		position: absolute;
+		top: 0;
+		right: 30px;
+		font-size: 25px;
+		background-color: #001529;
+		color: #fff;
+		padding-top: 20px;
+	}
+}
+
+#components-layout-demo-custom-trigger .trigger {
+	padding: 0 24px;
+	font-size: 18px;
+	line-height: 64px;
+	cursor: pointer;
+	transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+	color: #1890ff;
+}
+
+.site-layout .site-layout-background {
+	background: #fff;
+}
