@@ -1,5 +1,5 @@
-import React from "react"
-import { Layout, Menu, Breadcrumb } from "antd"
+import React, { useState } from "react"
+import { Layout, Menu, Breadcrumb, Button } from "antd"
 import { Link, Outlet } from "react-router-dom"
 
 import {
@@ -12,7 +12,9 @@ import {
 	ProfileOutlined,
 	TagOutlined,
 	PayCircleOutlined,
-	AppstoreAddOutlined
+	AppstoreAddOutlined,
+	MenuUnfoldOutlined,
+	MenuFoldOutlined
 } from "@ant-design/icons"
 
 import "./style.scss"
@@ -20,21 +22,36 @@ import "./style.scss"
 const { Header, Content, Sider } = Layout
 
 export default function Home() {
+
+	const [collapsed, setCollapsed] = useState(false)
+	// console.log(collapsed);
+	const toggle = () => {
+		setCollapsed(!collapsed);
+	};
+
 	return (
-		<Layout>
+		<Layout className="layout">
 			<Header className="header">
 				<div className="logo">
 					<p>后台管理系统</p>
 				</div>
+
+
 				<Link to="/login">
 					<LoginOutlined className="login" />
 				</Link>
 			</Header>
 			<Layout>
-				<Sider width={200} className="site-layout-background">
+				<Sider width={200} trigger={null} collapsible collapsed={collapsed} className="sider">
+					<div className="coll">
+						{React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+							className: 'trigger',
+							onClick: toggle,
+						})}
+					</div>
 					<Menu
 						mode="inline"
-						defaultSelectedKeys={["2"]}
+						defaultSelectedKeys={["1"]}
 						theme="dark"
 						style={{ height: "100%", borderRight: 0 }}
 					>
@@ -61,6 +78,7 @@ export default function Home() {
 							padding: 24,
 							margin: 0,
 							minHeight: 280,
+							backgroundColor: '#fff'
 						}}
 					>
 						<Outlet />
