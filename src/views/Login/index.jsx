@@ -7,16 +7,11 @@ import "./style.scss"
 
 export default function Login() {
 	const dispatch = useDispatch()
-	const onFinish = values => {
-		console.log("Success:", values)
-	}
 
-	const onFinishFailed = errorInfo => {
-		console.log("Failed:", errorInfo)
+	const onFinish = (value) => {
+		const { mobile, password } = value
+		dispatch(LoginAction({ mobile, password }))
 	}
-	useEffect(() => {
-		dispatch(LoginAction({ mobile: 138000000002, password: 123456 }))
-	}, [dispatch])
 
 	return (
 		<div className="login-page">
@@ -28,21 +23,18 @@ export default function Login() {
 				wrapperCol={{
 					span: 16
 				}}
-				initialValues={{
-					remember: true
-				}}
-				onFinish={onFinish}
-				onFinishFailed={onFinishFailed}
 				autoComplete="off"
 				className="loginForm"
+				onFinish={onFinish}
 			>
 				<Form.Item
-					label="用户名"
-					name="username"
+					label="电话"
+					name="mobile"
+					initialValue='13800000002'
 					rules={[
 						{
 							required: true,
-							message: "请正确输入用户名"
+							message: "请正确输入电话"
 						}
 					]}
 				>
@@ -58,6 +50,7 @@ export default function Login() {
 							message: "请输入密码"
 						}
 					]}
+					initialValue='123456'
 				>
 					<Input.Password />
 				</Form.Item>

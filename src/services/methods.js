@@ -7,6 +7,8 @@ export const login = data => {
 		withCredentials: false,
 		responseType: "json",
 		headers: { "Content-Type": "application/json;charset=utf-8" },
-		data: { data }
+		data: {
+			data
+		}
 	})
 }

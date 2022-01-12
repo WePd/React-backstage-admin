@@ -1,16 +1,22 @@
 import React from "react"
 import { Layout, Menu, Breadcrumb } from "antd"
-import { Link } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
+
 import {
+	HomeOutlined,
+	LoginOutlined,
+	ApartmentOutlined,
 	UserOutlined,
-	LaptopOutlined,
-	NotificationOutlined,
-	LoginOutlined
+	ClusterOutlined,
+	LockOutlined,
+	ProfileOutlined,
+	TagOutlined,
+	PayCircleOutlined,
+	AppstoreAddOutlined
 } from "@ant-design/icons"
 
 import "./style.scss"
 
-const { SubMenu } = Menu
 const { Header, Content, Sider } = Layout
 
 export default function Home() {
@@ -28,32 +34,19 @@ export default function Home() {
 				<Sider width={200} className="site-layout-background">
 					<Menu
 						mode="inline"
-						defaultSelectedKeys={["1"]}
-						defaultOpenKeys={["sub1"]}
+						defaultSelectedKeys={["2"]}
+						theme="dark"
 						style={{ height: "100%", borderRight: 0 }}
 					>
-						<SubMenu key="sub1" icon={<UserOutlined />} title="企业管理">
-							<Menu.Item key="1">option1</Menu.Item>
-							<Menu.Item key="2">option2</Menu.Item>
-							<Menu.Item key="3">option3</Menu.Item>
-							<Menu.Item key="4">option4</Menu.Item>
-						</SubMenu>
-						<SubMenu key="sub2" icon={<LaptopOutlined />} title="员工管理">
-							<Menu.Item key="5">option5</Menu.Item>
-							<Menu.Item key="6">option6</Menu.Item>
-							<Menu.Item key="7">option7</Menu.Item>
-							<Menu.Item key="8">option8</Menu.Item>
-						</SubMenu>
-						<SubMenu
-							key="sub3"
-							icon={<NotificationOutlined />}
-							title="权限管理"
-						>
-							<Menu.Item key="9">option9</Menu.Item>
-							<Menu.Item key="10">option10</Menu.Item>
-							<Menu.Item key="11">option11</Menu.Item>
-							<Menu.Item key="12">option12</Menu.Item>
-						</SubMenu>
+						<Menu.Item key="1" icon={<HomeOutlined />}><Link to='/home/dashBoard'>首页</Link></Menu.Item>
+						<Menu.Item key="2" icon={<ApartmentOutlined />}><Link to='/home/departments'>组织架构</Link></Menu.Item>
+						<Menu.Item key="3" icon={<UserOutlined />}><Link to='/home/employees'>员工</Link></Menu.Item>
+						<Menu.Item key="4" icon={<ClusterOutlined />}><Link to='/home/setting'>公司设置</Link></Menu.Item>
+						<Menu.Item key="5" icon={<LockOutlined />}><Link to="/home/permissions">权限设置</Link></Menu.Item>
+						<Menu.Item key="6" icon={<ProfileOutlined />}><Link to='/home/socialSecuritys'>社保</Link></Menu.Item>
+						<Menu.Item key="7" icon={<TagOutlined />}><Link to='attendances'>考勤</Link></Menu.Item>
+						<Menu.Item key="8" icon={<PayCircleOutlined />}><Link to='/home/salarys'>工资</Link></Menu.Item>
+						<Menu.Item key="9" icon={<AppstoreAddOutlined />}><Link to='/home/accraditation'>审批</Link></Menu.Item>
 					</Menu>
 				</Sider>
 				<Layout style={{ padding: "0 24px 24px" }}>
@@ -68,10 +61,9 @@ export default function Home() {
 							padding: 24,
 							margin: 0,
 							minHeight: 280,
-							backgroundColor: "#fff"
 						}}
 					>
-						Content
+						<Outlet />
 					</Content>
 				</Layout>
 			</Layout>
