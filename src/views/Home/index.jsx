@@ -1,7 +1,9 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Layout, Menu, Breadcrumb, Button } from "antd"
 import { Link, Outlet } from "react-router-dom"
-
+import { ProfileAction } from '../../store/actionCreateors'
+import { useDispatch } from 'react-redux'
+import routes from "../../router"
 import {
 	HomeOutlined,
 	LoginOutlined,
@@ -24,19 +26,29 @@ const { Header, Content, Sider } = Layout
 export default function Home() {
 
 	const [collapsed, setCollapsed] = useState(false)
-	// console.log(collapsed);
+	const dispatch = useDispatch()
 	const toggle = () => {
-		setCollapsed(!collapsed);
+		setCollapsed(() => !collapsed);
 	};
+	useEffect(() => {
+		// dispatch(ProfileAction())
+	})
 
+	function itemRender(route, params, routes, paths) {
+		console.log(route, paths);
+		const last = routes.indexOf(route) === routes.length - 1;
+		return last ? (
+			<span>{route.breadcrumbName}</span>
+		) : (
+			<Link to={paths.join('/')}>{route.breadcrumbName}</Link>
+		);
+	}
 	return (
 		<Layout className="layout">
 			<Header className="header">
 				<div className="logo">
 					<p>后台管理系统</p>
 				</div>
-
-
 				<Link to="/login">
 					<LoginOutlined className="login" />
 				</Link>
@@ -67,10 +79,7 @@ export default function Home() {
 					</Menu>
 				</Sider>
 				<Layout style={{ padding: "0 24px 24px" }}>
-					<Breadcrumb style={{ margin: "16px 0" }}>
-						<Breadcrumb.Item>Home</Breadcrumb.Item>
-						<Breadcrumb.Item>List</Breadcrumb.Item>
-						<Breadcrumb.Item>App</Breadcrumb.Item>
+					<Breadcrumb style={{ margin: "16px 0" }} itemRender={itemRender} routes={routes} separator=">">
 					</Breadcrumb>
 					<Content
 						className="site-layout-background"

@@ -16,9 +16,18 @@ const routes = [
   {
     path: "/home",
     element: <Home />,
+    breadcrumbName: "home",
     children: [
-      { path: "dashBoard", element: <DashBoard /> },
-      { path: "departments", element: <Departments /> },
+      {
+        path: "dashBoard",
+        element: <DashBoard />,
+        breadcrumbName: "dashBoard",
+      },
+      {
+        path: "departments",
+        element: <Departments />,
+        breadcrumbName: "departments",
+      },
       { path: "employees", element: <Employees /> },
       { path: "permissions", element: <Permissions /> },
       { path: "salarys", element: <Salarys /> },
@@ -31,7 +40,7 @@ const routes = [
   {
     path: "*",
     element: <Navigate to="/login" />,
-    exact: false,
+    exact: true,
   },
 ];
 

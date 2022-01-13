@@ -1,18 +1,25 @@
 import React, { useEffect } from "react"
+import { useNavigate } from 'react-router-dom'
 import { Form, Input, Button, Checkbox } from "antd"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { LoginAction } from "../../store/actionCreateors"
 
 import "./style.scss"
 
 export default function Login() {
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const token = useSelector(state => state.user)
 
 	const onFinish = (value) => {
 		const { mobile, password } = value
 		dispatch(LoginAction({ mobile, password }))
 	}
 
+	if (token !== null) {
+		localStorage.setItem('user', JSON.stringify(token))
+		navigate('/home')
+	}
 	return (
 		<div className="login-page">
 			<Form
